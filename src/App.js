@@ -21,24 +21,24 @@ function App() {
 
   //Fetch tasks
   const fetchTasks = async () => {
-    const res = await fetch('http://localhost:5000/tasks');
+    const res = await fetch('http://localhost:5002/tasks');
     const data = await res.json();
     return data;
   };
 
   //Fetch single task
   const fetchTask = async (id) => {
-    const res = await fetch(`http://localhost:5000/tasks/${id}`);
+    const res = await fetch(`http://localhost:5002/tasks/${id}`);
     const data = await res.json();
     return data;
   };
 
   //Add Task
   const addTask = async (task) => {
-    const res = await fetch('http://localhost:5000/tasks', {
+    const res = await fetch('http://localhost:5002/tasks', {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify(task),
+      body: JSON.stringify(task)
     });
 
     const data = await res.json();
@@ -53,7 +53,7 @@ function App() {
 
   //Delete Tasks
   const deleteTask = async (id) => {
-    await fetch(`http://localhost:5000/tasks/${id}`, { method: 'DELETE' });
+    await fetch(`http://localhost:5002/tasks/${id}`, { method: 'DELETE' });
 
     setTasks(tasks.filter((task) => task.id !== id));
   };
@@ -63,10 +63,10 @@ function App() {
     const taskToToggle = await fetchTask(id);
     const updatedTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
 
-    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+    const res = await fetch(`http://localhost:5002/tasks/${id}`, {
       method: 'PUT',
       headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify(updatedTask),
+      body: JSON.stringify(updatedTask)
     });
 
     const data = await res.json();
